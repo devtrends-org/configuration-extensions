@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using Microsoft.Extensions.Configuration;
 
-namespace ConfigurationExtensions;
+namespace DevTrends.ConfigurationExtensions;
 
 public static class ConfigurationManangerExtensions
 {

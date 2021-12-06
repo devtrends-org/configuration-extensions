@@ -1,4 +1,4 @@
-namespace ConfigurationExtensions;
+namespace DevTrends.ConfigurationExtensions;
 
 public class ConfigurationBindException : Exception
 {

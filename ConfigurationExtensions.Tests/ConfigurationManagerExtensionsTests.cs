@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Extensions.Configuration;
 using Xunit;
 
-namespace ConfigurationExtensions.Tests;
+namespace DevTrends.ConfigurationExtensions.Tests;
 
 public class ConfigurationManagerExtensionsTests
 {
