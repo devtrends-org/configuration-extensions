@@ -4,6 +4,14 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <Authors>Paul Hiles</Authors>
+    <Company>DevTrends</Company>
+    <Description>Bind configuration to records and classes with parameterized (non parameterless) constructors.</Description>
+    <RepositoryUrl>https://github.com/devtrends-org/configuration-extensions</RepositoryUrl>
+    <Copyright>DevTrends</Copyright>
+    <PackageTags>configuration</PackageTags>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Version>1.0.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
