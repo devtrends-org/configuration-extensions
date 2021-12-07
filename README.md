@@ -1,6 +1,6 @@
 # DevTrends.ConfigurationExtensions
 
-![Test Status](https://github.com/devtrends-org/configuration-extensions/actions/workflows/publish.yml/badge.svg)
+[![Test Status](https://github.com/devtrends-org/configuration-extensions/actions/workflows/publish.yml/badge.svg)](https://github.com/devtrends-org/configuration-extensions/actions)
 
 [![DevTrends.ConfigurationExtensions on NuGet](https://badgen.net/nuget/v/DevTrends.ConfigurationExtensions)](https://www.nuget.org/packages/DevTrends.ConfigurationExtensions/)
 
