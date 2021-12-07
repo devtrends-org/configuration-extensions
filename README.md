@@ -1,5 +1,9 @@
 # DevTrends.ConfigurationExtensions
 
+![Test Status](https://github.com/devtrends-org/configuration-extensions/actions/workflows/publish.yml/badge.svg)
+
+[![DevTrends.ConfigurationExtensions on NuGet](https://badgen.net/nuget/v/DevTrends.ConfigurationExtensions)](https://www.nuget.org/packages/DevTrends.ConfigurationExtensions/)
+
 This package provides a couple of extension methods that allow you to bind configuration to records and classes with parameterized (non parameterless) constructors.
 
 It also works nicely with nullable types and nullable reference types (NRTs) and should help you avoid some of those annoying 'possible null reference' warnings.
@@ -52,4 +56,4 @@ You can bind to properties of the following type (plus nullable version includin
 
 Your classes or records must have a public constructor which sets all properties that you wish to automatically populate.
 
-If you have any option configuration values, be sure to use nullable types.
+If you have any optional configuration values, be sure to use nullable types.
