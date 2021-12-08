@@ -8,7 +8,7 @@ This package provides a couple of extension methods that allow you to bind confi
 
 It also works nicely with nullable types and nullable reference types (NRTs) and should help you avoid some of those annoying 'possible null reference' warnings.
 
-The package works on the 'fail fast' principal and any missing non-nullable configuration values will result in an exception at startup.
+The package works on the 'fail fast' principle and any missing non-nullable configuration values will result in an exception at startup.
 
 Note that the package extends the built-in configuration so it will pick up settings from all the usual sources such as appsettings, environment variables etc.
 
