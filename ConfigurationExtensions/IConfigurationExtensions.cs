@@ -3,14 +3,14 @@ using Microsoft.Extensions.Configuration;
 
 namespace DevTrends.ConfigurationExtensions;
 
-public static class ConfigurationManangerExtensions
+public static class IConfigurationExtensions
 {
-    public static T Bind<T>(this ConfigurationManager configurationManager, string? sectionKey = null)
+    public static T Bind<T>(this IConfiguration configuration, string? sectionKey = null)
     {
-        return (T)Bind(configurationManager, typeof(T), sectionKey)!;
+        return (T)Bind(configuration, typeof(T), sectionKey)!;
     }
 
-    private static object? Bind(this ConfigurationManager configurationManager, Type type,
+    private static object? Bind(this IConfiguration configuration, Type type,
         string? sectionKey, bool isNullable = false)
     {
         var keyToUse = sectionKey ?? type.Name;
@@ -28,7 +28,7 @@ public static class ConfigurationManangerExtensions
             Parameters = x.GetParameters().ToList()
         }).OrderByDescending(x => x.Parameters.Count).First();
 
-        if (isNullable && query.Parameters.Count > 0 && !configurationManager.GetSection(keyToUse).Exists())
+        if (isNullable && query.Parameters.Count > 0 && !configuration.GetSection(keyToUse).Exists())
         {
             return null;
         }
@@ -39,13 +39,13 @@ public static class ConfigurationManangerExtensions
         {
             var key = $"{keyToUse}:{parameter.Name}";
 
-            parameters.Add(GetValue(configurationManager, key, parameter));
+            parameters.Add(GetValue(configuration, key, parameter));
         }
 
         return query.Constructor.Invoke(parameters.ToArray());
     }
 
-    private static object? GetValue(ConfigurationManager configurationManager, string key, ParameterInfo parameter)
+    private static object? GetValue(IConfiguration configuration, string key, ParameterInfo parameter)
     {
         var nullableType = GetNullableType(parameter);
 
@@ -53,10 +53,10 @@ public static class ConfigurationManangerExtensions
 
         if (type.IsClass && type != typeof(string))
         {
-            return Bind(configurationManager, type, key, nullableType != null);
+            return Bind(configuration, type, key, nullableType != null);
         }
 
-        var value = configurationManager[key];
+        var value = configuration[key];
 
         if (nullableType != null)
         {

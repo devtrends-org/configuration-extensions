@@ -5,7 +5,7 @@ using Xunit;
 
 namespace DevTrends.ConfigurationExtensions.Tests;
 
-public class ConfigurationManagerExtensionsTests
+public class IConfigurationExtensionsTests
 {
     [Fact]
     public void NoPublicConstructor_Throws()
