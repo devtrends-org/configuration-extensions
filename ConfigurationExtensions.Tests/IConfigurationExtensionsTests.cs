@@ -90,6 +90,7 @@ public class IConfigurationExtensionsTests
             new KeyValuePair<string, string>("MultipleTypes:Other", bool.TrueString),
             new KeyValuePair<string, string>("MultipleTypes:Misc", "3.14"),
             new KeyValuePair<string, string>("MultipleTypes:Blah", "1999-12-31"),
+            new KeyValuePair<string, string>("MultipleTypes:Url", "https://www.foo.com"),
         });
 
         var result = configurationManager.Bind<MultipleTypes>();
@@ -99,6 +100,7 @@ public class IConfigurationExtensionsTests
         Assert.True(result.Other);
         Assert.Equal(3.14m, result.Misc);
         Assert.Equal(DateTime.Parse("1999-12-31"), result.Blah);
+        Assert.Equal(new Uri("https://www.foo.com"), result.Url);
     }
 
     [Fact]
@@ -112,6 +114,7 @@ public class IConfigurationExtensionsTests
             new KeyValuePair<string, string>("MultipleTypes:Other", bool.TrueString),
             new KeyValuePair<string, string>("MultipleTypes:Misc", "3.14"),
             new KeyValuePair<string, string>("MultipleTypes:Blah", "1999-12-31"),
+            new KeyValuePair<string, string>("MultipleTypes:Url", "https://www.foo.com"),
         });
 
         var ex = Assert.Throws<ConfigurationBindException>(() => configurationManager.Bind<MultipleTypes>());
@@ -129,6 +132,7 @@ public class IConfigurationExtensionsTests
             new KeyValuePair<string, string>("MultipleTypes:Bar", "42"),
             new KeyValuePair<string, string>("MultipleTypes:Misc", "3.14"),
             new KeyValuePair<string, string>("MultipleTypes:Blah", "1999-12-31"),
+            new KeyValuePair<string, string>("MultipleTypes:Url", "https://www.foo.com"),
         });
 
         var ex = Assert.Throws<ConfigurationBindException>(() => configurationManager.Bind<MultipleTypes>());
@@ -146,6 +150,7 @@ public class IConfigurationExtensionsTests
             new KeyValuePair<string, string>("MultipleTypes:Bar", "42"),
             new KeyValuePair<string, string>("MultipleTypes:Other", bool.TrueString),
             new KeyValuePair<string, string>("MultipleTypes:Blah", "1999-12-31"),
+            new KeyValuePair<string, string>("MultipleTypes:Url", "https://www.foo.com"),
         });
 
         var ex = Assert.Throws<ConfigurationBindException>(() => configurationManager.Bind<MultipleTypes>());
@@ -162,11 +167,30 @@ public class IConfigurationExtensionsTests
             new KeyValuePair<string, string>("MultipleTypes:Foo", "s1"),
             new KeyValuePair<string, string>("MultipleTypes:Bar", "42"),
             new KeyValuePair<string, string>("MultipleTypes:Other", bool.TrueString),
-            new KeyValuePair<string, string>("MultipleTypes:Misc", "3.14")
+            new KeyValuePair<string, string>("MultipleTypes:Misc", "3.14"),
+            new KeyValuePair<string, string>("MultipleTypes:Url", "https://www.foo.com"),
         });
 
         var ex = Assert.Throws<ConfigurationBindException>(() => configurationManager.Bind<MultipleTypes>());
         Assert.Contains("Unable to set Blah", ex.Message);
+    }
+
+    [Fact]
+    public void MultipleTypes_Throws_When_Missing_Uri()
+    {
+        var configurationManager = new ConfigurationManager();
+
+        configurationManager.AddInMemoryCollection(new List<KeyValuePair<string, string>>
+        {
+            new KeyValuePair<string, string>("MultipleTypes:Foo", "s1"),
+            new KeyValuePair<string, string>("MultipleTypes:Bar", "42"),
+            new KeyValuePair<string, string>("MultipleTypes:Other", bool.TrueString),
+            new KeyValuePair<string, string>("MultipleTypes:Misc", "3.14"),
+            new KeyValuePair<string, string>("MultipleTypes:Blah", "1999-12-31")
+        });
+
+        var ex = Assert.Throws<ConfigurationBindException>(() => configurationManager.Bind<MultipleTypes>());
+        Assert.Contains("Unable to set Url", ex.Message);
     }
 
     [Fact]
@@ -181,6 +205,7 @@ public class IConfigurationExtensionsTests
             new KeyValuePair<string, string>("MultipleOptionalTypes:Other", bool.TrueString),
             new KeyValuePair<string, string>("MultipleOptionalTypes:Misc", "3.14"),
             new KeyValuePair<string, string>("MultipleOptionalTypes:Blah", "1999-12-31"),
+            new KeyValuePair<string, string>("MultipleOptionalTypes:Url", "https://www.foo.com"),
         });
 
         var result = configurationManager.Bind<MultipleOptionalTypes>();
@@ -190,6 +215,7 @@ public class IConfigurationExtensionsTests
         Assert.True(result.Other);
         Assert.Equal(3.14m, result.Misc);
         Assert.Equal(DateTime.Parse("1999-12-31"), result.Blah);
+        Assert.Equal(new Uri("https://www.foo.com"), result.Url);
     }
 
     [Fact]
@@ -204,6 +230,7 @@ public class IConfigurationExtensionsTests
         Assert.Null(result.Other);
         Assert.Null(result.Misc);
         Assert.Null(result.Blah);
+        Assert.Null(result.Url);
     }
 
     [Fact]
@@ -326,9 +353,9 @@ public record RequiredString(string Foo);
 
 public record OptionalString(string? Foo);
 
-public record MultipleTypes(string Foo, int Bar, bool Other, decimal Misc, DateTime Blah);
+public record MultipleTypes(string Foo, int Bar, bool Other, decimal Misc, DateTime Blah, Uri Url);
 
-public record MultipleOptionalTypes(string? Foo, int? Bar, bool? Other, decimal? Misc, DateTime? Blah);
+public record MultipleOptionalTypes(string? Foo, int? Bar, bool? Other, decimal? Misc, DateTime? Blah, Uri? Url);
 
 public record NestedRequired(string Something, RequiredString Other);
 

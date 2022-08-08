@@ -15,7 +15,7 @@
     <PackageReleaseNotes>https://github.com/devtrends-org/configuration-extensions/blob/master/CHANGELOG.md</PackageReleaseNotes>
     <PackageTags>configuration</PackageTags>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>1.1.0</Version>
+    <Version>1.2.0</Version>
   </PropertyGroup>
 
   <ItemGroup>

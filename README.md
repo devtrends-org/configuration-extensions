@@ -21,7 +21,7 @@ Note that the package extends the built-in configuration so it will pick up sett
 Given a record:
 
     public record Foo(string Bar, int Blah)
-    
+
 If you have the following in your appsettings:
 
     "Foo": {
@@ -32,27 +32,28 @@ If you have the following in your appsettings:
 You can bind the record to the settings by using:
 
     builder.Configuration.Bind<Foo>()
-    
+
 You will also need to add the following namespace to program.cs:
 
     using DevTrends.ConfigurationExtensions;
-    
+
 ## Dependency Injection
 
 You will probably want to register the strongly typed configuration classes with the DI container so instead of using the above, you can use:
 
     builder.Services.AddSingleton(builder.Configuration.Bind<Foo>());
-    
+
 ## What is supported?
 
 You can bind to properties of the following type (plus nullable version including nullable reference types such as string?):
 
-* string
-* int
-* bool
-* decimal
-* datetime
-* nested classes
+-   string
+-   int
+-   bool
+-   decimal
+-   datetime
+-   uri
+-   nested classes
 
 Your classes or records must have a public constructor which sets all properties that you wish to automatically populate.
 

@@ -51,7 +51,7 @@ public static class IConfigurationExtensions
 
         var type = nullableType ?? parameter.ParameterType;
 
-        if (type.IsClass && type != typeof(string))
+        if (type.IsClass && type != typeof(string) && type != typeof(Uri))
         {
             return Bind(configuration, type, key, nullableType != null);
         }
@@ -107,6 +107,16 @@ public static class IConfigurationExtensions
             if (DateTime.TryParse(value, out var dateTimeValue))
             {
                 return dateTimeValue;
+            }
+
+            throw new ConfigurationBindException($"Error converting value '{value}' to a datetime. Source: '{key}'");
+        }
+
+        if (type == typeof(Uri))
+        {
+            if (Uri.TryCreate(value, UriKind.Absolute, out var uriValue))
+            {
+                return uriValue;
             }
 
             throw new ConfigurationBindException($"Error converting value '{value}' to a datetime. Source: '{key}'");
