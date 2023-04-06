@@ -119,7 +119,7 @@ public static class IConfigurationExtensions
                 return uriValue;
             }
 
-            throw new ConfigurationBindException($"Error converting value '{value}' to a datetime. Source: '{key}'");
+            throw new ConfigurationBindException($"Error converting value '{value}' to a uri. Source: '{key}'");
         }
 
         throw new ConfigurationBindException($"Unhandled type '{type.FullName}'");
